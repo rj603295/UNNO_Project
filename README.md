@@ -1,29 +1,29 @@
-# unno_project
+# 執行方式
+- 請把專案 clone 下來後，先使用 `npm install` ，再使用 `npm run dev` 開啟
+- Node.js version 需要為 15.0 以上
+# 專案架構、邏輯說明
+- 總共有三個 Page：
+  1. 首頁（HomeView）
+  2. 書本列表（ListView） - 含新增頁面
+  3. 書本詳情頁（DetailView） - 含編輯頁面  
+<br/>
 
-This template should help get you started developing with Vue 3 in Vite.
+- 新增頁面包含在書本列表頁，使用更改狀態（read or add）的方式去操控要顯示<u><strong>書本列表</strong></u>或是<u><strong>新增頁面</strong></u>，編輯頁面包含在書本詳情頁，同樣使用更改狀態的方式去操控要顯示<u><strong>編輯</strong></u>或是<u><strong>書本詳情頁</strong></u>。  
+<br/>
 
-## Recommended IDE Setup
+- 排版包含了 RWD（使用 media query），使其能在各種裝置或寬度能夠自適應（手機、桌面）。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+# 所有使用到的第三方 library
+- axios
+  - 用來處理 AJAX 十分方便，且套件不占太多容量，並且方便易用，還可以自動轉換 JSON 型態的數據。因專案需串接 API（使用 get, post, patch 等方法），因此使用 axios 去做處理。
+- eslint
+  - 使程式碼簡潔，可以幫忙檢查程式碼排版及 coding style。
+- scss
+  - 使 css 的撰寫更加的方便快速。
+- fontawesome
+  - 具有大量向量字體圖示，並且可以直接調整大小及顏色，因為專案有圖示的需求，使用 fontawesome 非常方便。
+- vee-validate
+  - 專用於 Vue.js 的表單驗證套件，可以輕鬆做出表單驗證，檢查使用者輸入的資料完不完整，並也可以自己撰寫驗證規則。因專案修改及新增書本的部分需要預先檢查使用者填寫的資料是否不為空值，並做阻擋，因此使用此套件。
+# 這份專案中遇到的困難、問題，以及解決的方法
+1. 花較多時間的地方在 RWD 的排版，因為想要使專案可以自適應各種尺寸、寬度的裝置，在字體大小，欄位寬度等等...使用 `flex` 和 `grid` 還有寬度及高度使用 `百分比` ，使專案可以直接依照螢幕尺寸延展寬度。
+2. 另外自己手刻了新增及修改頁面的 input，花了一點時間研究如何把名稱、作者、備註放在 input 的左側，最後使用 `position: relative; postion: absolute;` 相對、絕對定位的方式去做元素重疊，解決了這部分的問題。

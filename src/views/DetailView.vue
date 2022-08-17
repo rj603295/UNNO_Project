@@ -113,10 +113,16 @@ export default {
       description: ''
     }
   },
+  computed: {
+    bookApiUrl () {
+      const route = 'https://fe-interview-api.unnotech.com/books'
+      const params = this.$route.params.bookId
+      return `${route}/${params}`
+    }
+  },
   created () {
     this.getBookDetail()
   },
-
   methods: {
     handleEdit () {
       this.status = 'edit'
@@ -125,8 +131,7 @@ export default {
       this.description = this.detail.description
     },
     getBookDetail () {
-      const id = this.$route.params.bookId
-      this.$http.get(`https://fe-interview-api.unnotech.com/books/${id}`)
+      this.$http.get(this.bookApiUrl)
         .then((res) => {
           this.detail = res.data
         }).catch((err) => {
@@ -134,8 +139,7 @@ export default {
         })
     },
     updateBook () {
-      const id = this.$route.params.bookId
-      this.$http.patch(`https://fe-interview-api.unnotech.com/books/${id}`, {
+      this.$http.patch(this.bookApiUrl, {
         title: this.title,
         author: this.author,
         description: this.description
